@@ -2,10 +2,11 @@
 
 GUARD runs on the saved outputs of each frozen model: predicted probabilities,
 retrieval features and labels, for every degraded condition. These files are
-model outputs, not the original datasets, and are hosted on Hugging Face.
+model outputs, not the original datasets, and are attached to the
+[v1.0 release](https://github.com/kongwoang/GUARD/releases/tag/v1.0) of this repository.
 
 ```bash
-bash data/download.sh              # all seven benchmarks, about 2.5 GB
+bash data/download.sh              # all seven benchmarks, about 2.4 GB
 bash data/download.sh mosei ave    # only some of them
 ```
 

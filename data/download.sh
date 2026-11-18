@@ -1,37 +1,21 @@
 #!/usr/bin/env bash
 # Download the saved outputs of the frozen models into data/artifacts.
 #
-#   bash data/download.sh              # all seven benchmarks, about 2.5 GB
+#   bash data/download.sh              # all seven benchmarks, about 2.4 GB
 #   bash data/download.sh mosei ave    # only some of them
 set -euo pipefail
 
-REPO="${GUARD_ARTIFACT_REPO:-anonymous221206/GUARD_checkpoint}"
+URL="https://github.com/kongwoang/GUARD/releases/download/v1.0"
 DEST="${GUARD_ARTIFACTS:-$(cd "$(dirname "$0")" && pwd)/artifacts}"
+ALL="mosei iemocap opportunity ave ninapro ptbxl drugban"
 
-files() {
-  case "$1" in
-    mosei)       echo "mosei_cmad/*" ;;
-    iemocap)     echo "iemocap_momke/*" ;;
-    opportunity) echo "opportunity_dcl_v2/*" ;;
-    ave)         echo "ave_av_att/dumps/*" ;;
-    ninapro)     echo "ninapro_cnn/seed*/*" ;;
-    ptbxl)       echo "ptbxl_resnet1d_wang/*" ;;
-    drugban)     echo "drugban_processed/*" ;;
-    *) echo "unknown benchmark: $1" >&2; exit 1 ;;
-  esac
-}
-
-[ $# -eq 0 ] && set -- mosei iemocap opportunity ave ninapro ptbxl drugban
-patterns=()
+[ $# -eq 0 ] && set -- $ALL
+mkdir -p "$DEST"
 for name in "$@"; do
-  patterns+=("$(files "$name")")
+  case " $ALL " in *" $name "*) ;; *) echo "unknown benchmark: $name" >&2; exit 1 ;; esac
+  echo "downloading $name"
+  curl -fL --retry 3 -o "$DEST/$name.zip" "$URL/$name.zip"
+  unzip -qo "$DEST/$name.zip" -d "$DEST"
+  rm "$DEST/$name.zip"
 done
-
-python - "$REPO" "$DEST" "${patterns[@]}" <<'PY'
-import sys
-from huggingface_hub import snapshot_download
-
-repo, dest, *patterns = sys.argv[1:]
-snapshot_download(repo_id=repo, repo_type="dataset", local_dir=dest, allow_patterns=patterns)
-print(f"saved to {dest}")
-PY
+echo "saved to $DEST"
