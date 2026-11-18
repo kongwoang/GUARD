@@ -1,0 +1,7 @@
+# Versions used for the paper. k-NN ties are broken by NumPy, so other versions
+# can change a few cells slightly.
+numpy==2.5.2
+scipy==1.18.1
+scikit-learn==1.9.0
+huggingface-hub>=0.20
+pytest>=7
