@@ -4,7 +4,7 @@
 
 **Risk-Controlled Correction for Frozen Multimodal Models under Missing Modalities**
 
-[![Paper](https://img.shields.io/badge/Paper-arXiv%20(soon)-b31b1b.svg)](#citation)
+[![Paper](https://img.shields.io/badge/arXiv-2611.23886-b31b1b.svg)](https://arxiv.org/abs/2611.23886)
 [![Python](https://img.shields.io/badge/Python-3.12-3776AB.svg?logo=python&logoColor=white)](requirements.txt)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
@@ -57,7 +57,10 @@ tests/         checks on synthetic data
 @misc{phamcong2026guard,
   title  = {Risk-Controlled Correction for Frozen Multimodal Models under Missing Modalities},
   author = {Hoang Pham Cong and Long D. Nguyen and Ho Viet Duc Luong and Nguyen Tran Minh Nhat and Binh P. Nguyen and Huynh Thi Thanh Binh},
-  year   = {2026}
+  year   = {2026},
+  eprint = {2611.23886},
+  archivePrefix = {arXiv},
+  url    = {https://arxiv.org/abs/2611.23886}
 }
 ```
 
